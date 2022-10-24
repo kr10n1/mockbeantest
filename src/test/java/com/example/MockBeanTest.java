@@ -7,6 +7,7 @@ import io.micronaut.inject.qualifiers.Qualifiers;
 import io.micronaut.test.annotation.MockBean;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -28,6 +29,7 @@ public class MockBeanTest {
     }
 
     @MockBean(bean = TestClass.class)
+    @Named( "TestClass")
     TestClass TestClass() {
         TestClass client = mock(TestClass.class);
         applicationContext.registerSingleton(TestClass.class, client, Qualifiers.byName("TestClass"));
@@ -35,15 +37,27 @@ public class MockBeanTest {
     }
 
     @MockBean(bean = TestClass.class, named = "TestClass2")
+    @Named( "TestClass2")
     TestClass TestClass2() {
         return mock(TestClass.class);
     }
 
     @MockBean(bean = TestClass.class, named = "TestClass3")
+    @Named( "TestClass3")
     TestClass TestClass3() {
         TestClass client = mock(TestClass.class);
         applicationContext.registerSingleton(TestClass.class, client, Qualifiers.byName("TestClass3"));
         return client;
+    }
+    @MockBean(bean = TestClass.class, named = "TestClass4")
+    @Named( "TestClass4")
+    TestClass TestClass4() {
+        return mock(TestClass.class);
+    }
+    @MockBean(bean = TestClass.class)
+    @Named( "TestClass5")
+    TestClass TestClass5() {
+        return mock(TestClass.class);
     }
 
     @Test
@@ -54,7 +68,8 @@ public class MockBeanTest {
     @Test
     public void qualifier() {
         Qualifier<TestClass> TestClassQualifier = applicationContext
-                .getBeanDefinitions(TestClass.class).stream().map(BeanDefinition::getDeclaredQualifier).collect(toList())
+                .getBeanDefinitions(TestClass.class).stream()
+                .map(BeanDefinition::getDeclaredQualifier).collect(toList())
                 .get(0);
         assertNotNull(TestClassQualifier);
         String s = TestClassQualifier.toString();
@@ -76,8 +91,16 @@ public class MockBeanTest {
         TestClass TestClassQualifier = applicationContext
                 .getBean(TestClass.class, Qualifiers.byName("TestClass3"));
     }
-
-    public interface TestClass {
-
+    @Test
+    public void testclass4() {
+        TestClass TestClassQualifier = applicationContext
+                .getBean(TestClass.class, Qualifiers.byName("TestClass4"));
     }
+    @Test
+    public void testclass5() {
+        TestClass TestClassQualifier = applicationContext
+                .getBean(TestClass.class, Qualifiers.byName("TestClass5"));
+    }
+
+    interface TestClass{}
 }
