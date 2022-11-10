@@ -1,15 +1,10 @@
 package com.example;
 
 import io.micronaut.context.annotation.ConfigurationProperties;
-import jakarta.inject.Singleton;
 
-@Singleton
+@ConfigurationProperties("properties")
 public class ConfigurationPropsInst implements EachProp {
     private String value;
-
-    public ConfigurationPropsInst(ConfigurationProps props) {
-        this.value = props.getValue();
-    }
 
     @Override
     public void setValue(String value) {

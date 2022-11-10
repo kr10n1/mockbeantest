@@ -1,8 +1,8 @@
 package com.example;
 
 import io.micronaut.context.annotation.ConfigurationProperties;
-
-@ConfigurationProperties("configuration-properties")
+import io.micronaut.context.annotation.EachProperty;
+@ConfigurationProperties("properties")
 public class ConfigurationProps {
 
     private String value;

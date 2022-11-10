@@ -1,14 +1,16 @@
 package com.example;
 
-import java.util.List;
+import io.micronaut.context.annotation.EachBean;
 
-import io.micronaut.context.annotation.Context;
-
-@Context
+@EachBean(SingletonInterface.class)
 public class SingletonInstance {
-    private final List<EachBeanInst> list;
+    private final SingletonInterface single;
 
-    public SingletonInstance(List<EachBeanInst> list){
-        this.list = list;
+    public SingletonInstance(SingletonInterface single){
+        this.single = single;
     };
+
+    public SingletonInterface getSingle() {
+        return single;
+    }
 }

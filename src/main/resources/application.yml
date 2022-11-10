@@ -16,6 +16,6 @@ each-prop:
   test3:
     value: value3
 
-configuration-properties:
+properties:
   testImpl1:
     value: valueImpl
