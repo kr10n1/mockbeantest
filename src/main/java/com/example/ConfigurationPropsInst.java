@@ -1,8 +1,11 @@
 package com.example;
 
 import io.micronaut.context.annotation.ConfigurationProperties;
+import jakarta.inject.Named;
+import jdk.jfr.Name;
 
 @ConfigurationProperties("properties")
+@Named("configuration-properties")
 public class ConfigurationPropsInst implements EachProp {
     private String value;
 
