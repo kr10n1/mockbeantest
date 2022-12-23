@@ -1,21 +1,6 @@
-micronaut:
-  application:
-    name: mockbeantest
-  server:
-    port: 8888
-netty:
-  default:
-    allocator:
-      max-order: 3
 
-each-prop:
+submodule:
   test1:
-    value: value1
+    value: test1
   test2:
-    value: value2
-  test3:
-    value: value3
-
-properties:
-  testImpl1:
-    value: valueImpl
+    value: test2
